@@ -16,6 +16,9 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <meta-data
+                android:name="com.google.android.gms.ads.APPLICATION_ID"
+                android:value="ca-app-pub-2805994884844744~5962103159"/>
         <activity
                 android:name=".AuthenticatorActivity"
                 android:label="@string/title_activity_authenticator"

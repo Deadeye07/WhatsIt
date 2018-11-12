@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <android.support.v7.widget.Toolbar
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+<android.support.v7.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:background="?attr/colorPrimary"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
 
-    >
+>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+        <ImageView
+                android:id="@+id/media_image"
+                android:layout_width="match_parent"
+                android:layout_height="33dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="new post image"
+                android:scaleType="centerCrop"
+                android:visibility="visible" app:srcCompat="@drawable/logo"/>
         <EditText
                 android:id="@+id/editSearch"
                 android:layout_width="match_parent"
@@ -19,7 +31,8 @@
                 android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:padding="8dp"/>
+    </LinearLayout>
 
 
-    </android.support.v7.widget.Toolbar>
+</android.support.v7.widget.Toolbar>
 
