@@ -6,7 +6,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="90dp"
-        android:background="?attr/colorPrimary"
+        android:background="@color/colorPrimary"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
 
 >
@@ -14,23 +14,37 @@
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:layout_height="wrap_content">
-        <ImageView
-                android:id="@+id/media_image"
+        <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="33dp"
-                android:adjustViewBounds="true"
-                android:contentDescription="new post image"
-                android:scaleType="centerCrop"
-                android:visibility="visible" app:srcCompat="@drawable/logo"/>
-        <EditText
-                android:id="@+id/editSearch"
+                android:layout_height="40dp">
+            <ImageView
+                    android:id="@+id/media_image"
+                    android:layout_width="293dp"
+                    android:layout_height="33dp"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="new post image"
+                    android:scaleType="centerCrop"
+                    android:visibility="visible" app:srcCompat="@drawable/logo"/>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                android:hint="@android:string/search_go"
-                android:imeOptions="actionSearch"
-                android:inputType="text"
-                android:padding="8dp"/>
+                android:layout_height="match_parent">
+            <EditText
+                    android:id="@+id/editSearch"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:hint="@android:string/search_go"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:padding="8dp" android:layout_width="267dp"/>
+            <Button
+                    android:layout_height="match_parent" android:id="@+id/button2" android:layout_weight="1"
+                    android:layout_width="46dp" android:onClick="doSearch"
+                    android:drawableLeft="@android:drawable/ic_menu_search"
+                    android:background="@color/colorPrimary"/>
+        </LinearLayout>
     </LinearLayout>
 
 

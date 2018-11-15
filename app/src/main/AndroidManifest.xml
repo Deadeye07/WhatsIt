@@ -19,6 +19,7 @@
         <meta-data
                 android:name="com.google.android.gms.ads.APPLICATION_ID"
                 android:value="ca-app-pub-2805994884844744~5962103159"/>
+
         <activity
                 android:name=".AuthenticatorActivity"
                 android:label="@string/title_activity_authenticator"
@@ -35,6 +36,8 @@
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity android:name=".BaseActivity">
+        </activity>
+        <activity android:name=".SearchActivity">
         </activity>
     </application>
 
