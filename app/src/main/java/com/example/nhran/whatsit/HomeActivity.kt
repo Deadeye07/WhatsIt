@@ -2,12 +2,14 @@ package com.example.nhran.whatsit
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
+import android.widget.EditText
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
@@ -33,11 +35,12 @@ class HomeActivity : AppCompatActivity() {
         return true
     }
     fun doSearch(view: View) {
-        //Call ebay API
+        val editText = findViewById<EditText>(R.id.editSearch)
+        val searchTerm = editText.text.toString()
 
-        //Go to search activity
+        //Go to search activity and pass in search term
         val intent = Intent(this, SearchActivity::class.java).apply {
-
+            putExtra(EXTRA_MESSAGE, searchTerm)
         }
         startActivity(intent)
     }

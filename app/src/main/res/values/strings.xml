@@ -16,5 +16,7 @@
     <string name="title_activity_home">HomeActivity</string>
     <string name="platform_defaults">Platform Defaults</string>
     <string name="contact_us">Contact Us</string>
+    <string name="function_called">Function Called</string>
+    <string name="error">An Error Occurred</string>
 
 </resources>
