@@ -79,20 +79,33 @@ class SearchActivity : AppCompatActivity() {
 
                 val items = searchResult.getJSONArray("item")
 
+                val allPrices = arrayListOf<Int>()
+
                 for (i in 0 until items.length()) {
                     val item = items.getJSONObject(i)
-                    val title = item.getJSONArray("title")
+                    val sellingStatus = item.getJSONArray("sellingStatus")
+                    val price = sellingStatus.getJSONObject(0)
+                    val priceArray = price.getJSONArray("currentPrice")
+                    val priceGetingCloser = priceArray.getJSONObject(0)
+                    val finalPrice = priceGetingCloser.getInt("__value__")
                     //val name = item.getJSONArray("name").toInt()
-                    myItems.add(title.toString())
+                    allPrices.add(finalPrice)
+                    //myItems.add(title.toString())
                 }
+                val averagePrice = allPrices.average().toString()
+                val lowestPrice  = allPrices.min().toString()
+                val highestPrice = allPrices.max().toString()
                 //Create array adapter
-                val newAdapter =  ArrayAdapter<String>(this, R.layout.platform_results, myItems)
+                //val newAdapter =  ArrayAdapter<String>(this, R.layout.platform_results, averagePrice)
 
                 //GEt the listview to populate
-                val listView = findViewById<ListView>(R.id.searchResults)
+                val averageTextField = findViewById<TextView>(R.id.ebayAverage)
+                val highTextField =findViewById<TextView>(R.id.highPrice)
+                val lowTextField =findViewById<TextView>(R.id.lowPrice)
 
-                listView.adapter = newAdapter
-
+                averageTextField.setText(averagePrice)
+                highTextField.setText(highestPrice)
+                lowTextField.setText(lowestPrice)
 
             },
             Response.ErrorListener {
