@@ -8,17 +8,16 @@ import android.support.v7.app.ActionBar
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuInflater
-import android.widget.ArrayAdapter
-import android.widget.ListView
-import android.widget.TextView
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import org.json.JSONObject
 import android.R.attr.duration
+import android.content.Intent
 import android.support.design.widget.Snackbar
 import android.view.View
+import android.widget.*
 
 
 class SearchActivity : AppCompatActivity() {
@@ -37,6 +36,15 @@ class SearchActivity : AppCompatActivity() {
         doSearch(searchTerm)
 
 
+        val ebayTile = findViewById<LinearLayout>(R.id.ebayTileLayout)
+        ebayTile.setOnClickListener(View.OnClickListener { ebayTileClicked()})
+    }
+     fun ebayTileClicked(){
+        //Go to search activity and pass in search term
+        val intent = Intent(this, EbayResults::class.java).apply {
+            //putExtra(EXTRA_MESSAGE, searchTerm)
+        }
+        startActivity(intent)
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater

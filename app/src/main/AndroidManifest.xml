@@ -17,7 +17,6 @@
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:usesCleartextTraffic="true">
-
         <meta-data
                 android:name="com.google.android.gms.ads.APPLICATION_ID"
                 android:value="ca-app-pub-2805994884844744~5962103159"/>
@@ -37,11 +36,19 @@
                 android:label="@string/title_activity_home"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".SearchActivity"
-            android:parentActivityName=".HomeActivity">
+        <activity
+                android:name=".SearchActivity"
+                android:parentActivityName=".HomeActivity"
+                android:launchMode="singleTop">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".HomeActivity" />
+                    android:value=".HomeActivity"/>
+        </activity>
+        <activity android:name=".EbayResults"
+                  android:parentActivityName=".SearchActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".SearchActivity"/>
         </activity>
     </application>
 
