@@ -18,7 +18,7 @@ class AuthenticatorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_authenticator)
-        setSupportActionBar(toolbar)
+       // setSupportActionBar(toolbar)
         // Add a call to initialize AWSMobileClient
         AWSMobileClient.getInstance().initialize(this) {
             val signin = AWSMobileClient.getInstance().getClient(
