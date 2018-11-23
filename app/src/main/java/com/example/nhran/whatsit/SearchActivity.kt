@@ -18,6 +18,9 @@ import android.content.Intent
 import android.support.design.widget.Snackbar
 import android.view.View
 import android.widget.*
+import com.jjoe64.graphview.series.BarGraphSeries
+import com.jjoe64.graphview.GraphView
+import com.jjoe64.graphview.series.DataPoint
 
 
 class SearchActivity : AppCompatActivity() {
@@ -33,11 +36,32 @@ class SearchActivity : AppCompatActivity() {
 
         // Get the Intent that started this activity and extract the string
         val searchTerm = intent.getStringExtra(EXTRA_MESSAGE)
+
+        //Place search term in search boc
+        val editText = findViewById<EditText>(R.id.editSearch)
+        editText.setText(searchTerm)
+
+        //Do ebay search
         doSearch(searchTerm)
 
 
+        //Set on click listener on tile to go to platform detail activity
         val ebayTile = findViewById<LinearLayout>(R.id.ebayTileLayout)
         ebayTile.setOnClickListener(View.OnClickListener { ebayTileClicked()})
+
+
+        //Test graph
+        val graph = findViewById<View>(R.id.miniGraph) as GraphView
+        val series = BarGraphSeries<DataPoint>(
+            arrayOf<DataPoint>(
+                DataPoint(0.0, -1.0),
+                DataPoint(1.0, 5.0),
+                DataPoint(2.0, 3.0),
+                DataPoint(3.0, 2.0),
+                DataPoint(4.0, 6.0)
+            )
+        )
+        graph.addSeries(series)
     }
      fun ebayTileClicked(){
         //Go to search activity and pass in search term
