@@ -21,6 +21,10 @@ import android.widget.*
 import com.jjoe64.graphview.series.BarGraphSeries
 import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.series.DataPoint
+import com.example.nhran.whatsit.R.id.graph
+import com.jjoe64.graphview.helper.StaticLabelsFormatter
+
+
 
 
 class SearchActivity : AppCompatActivity() {
@@ -50,18 +54,7 @@ class SearchActivity : AppCompatActivity() {
         ebayTile.setOnClickListener(View.OnClickListener { ebayTileClicked()})
 
 
-        //Test graph
-        val graph = findViewById<View>(R.id.miniGraph) as GraphView
-        val series = BarGraphSeries<DataPoint>(
-            arrayOf<DataPoint>(
-                DataPoint(0.0, -1.0),
-                DataPoint(1.0, 5.0),
-                DataPoint(2.0, 3.0),
-                DataPoint(3.0, 2.0),
-                DataPoint(4.0, 6.0)
-            )
-        )
-        graph.addSeries(series)
+
     }
      fun ebayTileClicked(){
         //Go to search activity and pass in search term
@@ -130,6 +123,32 @@ class SearchActivity : AppCompatActivity() {
                 //Create array adapter
                 //val newAdapter =  ArrayAdapter<String>(this, R.layout.platform_results, averagePrice)
 
+                val rangeIncrement = (highestPrice.toInt().minus(lowestPrice.toInt())) / 3 //Create 3 price groups that will be bars
+
+                val firstIncrement = lowestPrice.toInt() + rangeIncrement
+                val secondIncrement = firstIncrement + rangeIncrement
+                val thirdIncrement = secondIncrement + rangeIncrement
+                //loop through prices, if it's less than increment, then add to that increments count and remove it from price array
+
+                val firstIncrementCount = allPrices.count { it < firstIncrement }
+                val secondIncrementCount = allPrices.count { it in firstIncrement..secondIncrement}
+                val thirdIncrementCount = allPrices.count { it in secondIncrement..thirdIncrement}
+
+                //Create graph
+                val graph = findViewById<View>(R.id.miniGraph) as GraphView
+                // use static labels for horizontal and vertical labels
+                val staticLabelsFormatter = StaticLabelsFormatter(graph)
+                staticLabelsFormatter.setHorizontalLabels(arrayOf(lowestPrice + '-'+ firstIncrement.toString(),firstIncrement.toString()+'-'+secondIncrement ,secondIncrement.toString() + '-' +thirdIncrement ))
+                graph.gridLabelRenderer.labelFormatter = staticLabelsFormatter
+                val series = BarGraphSeries<DataPoint>(
+                    arrayOf(
+                        DataPoint(0.0, firstIncrementCount.toDouble()),
+                        DataPoint(1.0, secondIncrementCount.toDouble()),
+                        DataPoint(2.0, thirdIncrementCount.toDouble())
+
+                    )
+                )
+                graph.addSeries(series)
                 //GEt the listview to populate
                 val averageTextField = findViewById<TextView>(R.id.ebayAverage)
                 val highTextField =findViewById<TextView>(R.id.highPrice)

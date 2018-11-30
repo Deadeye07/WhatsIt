@@ -9,7 +9,10 @@ import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
+import android.widget.AbsListView
 import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.PopupMenu
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
@@ -43,5 +46,16 @@ class HomeActivity : AppCompatActivity() {
             putExtra(EXTRA_MESSAGE, searchTerm)
         }
         startActivity(intent)
+    }
+    fun onSearchFieldTap(view: View){
+        //Show textfield drop down
+        //val popup = PopupMenu(this, view)
+        //val inflater: MenuInflater = popup.menuInflater
+        //inflater.inflate(R.menu.searchmenu, popup.menu)
+        //popup.show()
+
+        val toolbar = findViewById<LinearLayout>(R.id.toolbarMainLayout)
+        toolbar.layoutParams.height = 400
+        toolbar.requestLayout()
     }
 }
