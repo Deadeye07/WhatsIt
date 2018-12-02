@@ -20,7 +20,7 @@ import com.google.android.gms.ads.MobileAds
 
 import kotlinx.android.synthetic.main.activity_home.*
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,43 +33,12 @@ class HomeActivity : AppCompatActivity() {
         val mAdView = findViewById<AdView>(R.id.adView)
         val adRequest = AdRequest.Builder().build()
         mAdView.loadAd(adRequest)
-
-        //SET LISTENER FOR KEYBOARD ENTER ON SEARCHFIELD
-        val searchField = findViewById<EditText>(R.id.editSearch)
-
-        searchField.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
-            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
-                //Perform Code
-                doSearch(searchField)
-                return@OnKeyListener true
-            }
-            false
-        })
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.maintoolbar, menu)
         return true
     }
-    fun doSearch(view: View) {
-        val editText = findViewById<EditText>(R.id.editSearch)
-        val searchTerm = editText.text.toString()
 
-        //Go to search activity and pass in search term
-        val intent = Intent(this, SearchActivity::class.java).apply {
-            putExtra(EXTRA_MESSAGE, searchTerm)
-        }
-        startActivity(intent)
-    }
-    fun onSearchFieldTap(view: View){
-        //Show textfield drop down
-        //val popup = PopupMenu(this, view)
-        //val inflater: MenuInflater = popup.menuInflater
-        //inflater.inflate(R.menu.searchmenu, popup.menu)
-        //popup.show()
 
-        val toolbar = findViewById<LinearLayout>(R.id.toolbarMainLayout)
-        toolbar.layoutParams.height = 400
-        toolbar.requestLayout()
-    }
 }

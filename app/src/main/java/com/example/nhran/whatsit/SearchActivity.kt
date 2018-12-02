@@ -27,7 +27,7 @@ import com.jjoe64.graphview.helper.StaticLabelsFormatter
 
 
 
-class SearchActivity : AppCompatActivity() {
+class SearchActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,11 +37,10 @@ class SearchActivity : AppCompatActivity() {
         val actionBar = supportActionBar
         actionBar!!.setDisplayHomeAsUpEnabled(true)
 
-
         // Get the Intent that started this activity and extract the string
         val searchTerm = intent.getStringExtra(EXTRA_MESSAGE)
 
-        //Place search term in search boc
+        //Place search term in search bar
         val editText = findViewById<EditText>(R.id.editSearch)
         editText.setText(searchTerm)
 
@@ -56,7 +55,7 @@ class SearchActivity : AppCompatActivity() {
 
 
     }
-     fun ebayTileClicked(){
+     private fun ebayTileClicked(){
         //Go to search activity and pass in search term
         val intent = Intent(this, EbayResults::class.java).apply {
             //putExtra(EXTRA_MESSAGE, searchTerm)
@@ -69,7 +68,7 @@ class SearchActivity : AppCompatActivity() {
         return true
     }
 
-    fun doSearch(term:String){
+    private fun doSearch(term:String){
         val builder = Uri.Builder()
         builder.scheme("http")
             .authority("svcs.ebay.com")
@@ -154,9 +153,13 @@ class SearchActivity : AppCompatActivity() {
                 val highTextField =findViewById<TextView>(R.id.highPrice)
                 val lowTextField =findViewById<TextView>(R.id.lowPrice)
 
-                averageTextField.setText(averagePrice)
-                highTextField.setText(highestPrice)
-                lowTextField.setText(lowestPrice)
+                val concatAverage = getString(R.string.dollar_sign) + averagePrice
+                val concatHigh = getString(R.string.dollar_sign) + highestPrice
+                val concatLow = getString(R.string.dollar_sign) + lowestPrice
+
+                averageTextField.text = concatAverage
+                highTextField.text = concatHigh
+                lowTextField.text = concatLow
 
             },
             Response.ErrorListener {

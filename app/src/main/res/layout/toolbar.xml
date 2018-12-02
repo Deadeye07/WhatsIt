@@ -3,7 +3,7 @@
 <android.support.v7.widget.Toolbar
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/toolbar"
+        xmlns:tools="http://schemas.android.com/tools" android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
@@ -11,68 +11,48 @@
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
 
 >
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:layout_height="100dp" android:id="@+id/toolbarMainLayout">
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_height="wrap_content">
-            <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp">
-                <ImageView
-                        android:id="@+id/media_image"
-                        android:layout_width="293dp"
-                        android:layout_height="33dp"
-                        android:adjustViewBounds="true"
-                        android:contentDescription="new post image"
-                        android:scaleType="centerCrop"
-                        android:visibility="visible" app:srcCompat="@drawable/logo"/>
-            </LinearLayout>
-            <ScrollView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_anchor="@id/searchFieldContainer"
-                    app:layout_anchorGravity="bottom|right|end">
-                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                              android:orientation="vertical"/>
 
-            </ScrollView>
-            <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/searchFieldContainer">
-                <EditText
-                        android:id="@+id/editSearch"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:hint="@android:string/search_go"
-                        android:imeOptions="actionSearch"
-                        android:inputType="text"
-                        android:padding="8dp" android:layout_width="267dp"
-                        android:onClick="onSearchFieldTap"
-                        android:clickable="true"
-                        android:focusable="true"/>
-                <Button
-                        android:layout_height="match_parent" android:id="@+id/button2" android:layout_weight="1"
-                        android:layout_width="46dp" android:onClick="doSearch"
-                        android:drawableLeft="@android:drawable/ic_menu_search"
-                        android:background="@color/colorPrimary"/>
-            </LinearLayout>
-        </LinearLayout>
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_height="wrap_content">
-            <Button
-                    android:text="Button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/button3"/>
-        </LinearLayout>
-    </LinearLayout>
+
+        <Button
+                android:layout_height="40dp" android:id="@+id/button2"
+                android:layout_width="40dp" android:onClick="doSearch"
+                android:drawableLeft="@android:drawable/ic_menu_search"
+                android:background="@color/colorPrimary"
+                app:layout_constraintStart_toEndOf="@+id/editSearch" android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"/>
+        <EditText
+                android:id="@+id/editSearch"
+                android:layout_height="wrap_content"
+                android:layout_width="fill_parent"
+
+                android:hint="@android:string/search_go"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:padding="8dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
+                app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="40dp"/>
+        <ImageView
+                android:id="@+id/media_image"
+                android:layout_width="51dp"
+                android:layout_height="49dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="new post image"
+                android:scaleType="centerCrop"
+                android:visibility="visible" app:srcCompat="@drawable/logo"
+                app:layout_constraintBottom_toTopOf="@+id/editSearch" android:layout_marginStart="8dp"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+
+    </android.support.constraint.ConstraintLayout>
 
 
 </android.support.v7.widget.Toolbar>

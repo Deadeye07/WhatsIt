@@ -9,15 +9,14 @@ import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.series.DataPoint
 
 
-class EbayResults : AppCompatActivity() {
+class EbayResults : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ebay_results)
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        setSupportActionBar(toolbar)
-        val actionBar = supportActionBar
-        actionBar!!.setDisplayHomeAsUpEnabled(true)
+
+        //val actionBar = supportActionBar
+        //actionBar!!.setDisplayHomeAsUpEnabled(true)
 
 
         val graph = findViewById<View>(R.id.graph) as GraphView
