@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.amazonaws.appsync'
 
 android {
     compileSdkVersion 28
@@ -37,5 +38,10 @@ dependencies {
     implementation 'com.google.android.gms:play-services-ads:17.1.0'
     implementation 'com.android.volley:volley:1.1.1'
     implementation 'com.jjoe64:graphview:4.2.2'
+    //Base SDK
+    implementation 'com.amazonaws:aws-android-sdk-core:2.8.+'
+    //AppSync SDK
+    implementation 'com.amazonaws:aws-android-sdk-appsync:2.6.+'
+    implementation 'com.amazonaws:aws-android-sdk-apigateway-core:2.7.+'
 
 }

@@ -29,7 +29,6 @@
                 android:id="@+id/editSearch"
                 android:layout_height="wrap_content"
                 android:layout_width="fill_parent"
-
                 android:hint="@android:string/search_go"
                 android:imeOptions="actionSearch"
                 android:inputType="text"
@@ -41,7 +40,7 @@
                 app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="40dp"/>
         <ImageView
                 android:id="@+id/media_image"
-                android:layout_width="51dp"
+                android:layout_width="154dp"
                 android:layout_height="49dp"
                 android:adjustViewBounds="true"
                 android:contentDescription="new post image"

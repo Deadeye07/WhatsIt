@@ -1,10 +1,8 @@
 package com.example.nhran.whatsit
 
 import android.net.Uri
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.AlarmClock.EXTRA_MESSAGE
-import android.support.v7.app.ActionBar
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuInflater
@@ -13,21 +11,31 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import org.json.JSONObject
-import android.R.attr.duration
 import android.content.Intent
 import android.support.design.widget.Snackbar
+import android.util.Log
 import android.view.View
 import android.widget.*
+import com.amazonaws.HttpMethod
+import com.amazonaws.http.HttpMethodName
+import com.amazonaws.mobile.api.idhxyqcn3bb3.EbaySearchMobileHubClient
+import com.amazonaws.mobile.client.AWSMobileClient
+import com.amazonaws.mobileconnectors.apigateway.ApiClientFactory
+import com.amazonaws.mobileconnectors.apigateway.ApiRequest
+import com.amazonaws.util.IOUtils
+import com.amazonaws.util.StringUtils
 import com.jjoe64.graphview.series.BarGraphSeries
 import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.series.DataPoint
 import com.example.nhran.whatsit.R.id.graph
 import com.jjoe64.graphview.helper.StaticLabelsFormatter
-
-
-
+import kotlin.concurrent.thread
 
 class SearchActivity : BaseActivity() {
+    companion object {
+        private val TAG = this::class.java.simpleName
+    }
+   // private var apiClient: EbaySearchMobileHubClient? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +61,45 @@ class SearchActivity : BaseActivity() {
         ebayTile.setOnClickListener(View.OnClickListener { ebayTileClicked()})
 
 
+        //Call test API
+        callCloudLogic(searchTerm)
+    }
+
+    private fun callCloudLogic(body: String) {
+
+        var apiClient = ApiClientFactory()
+            .credentialsProvider(AWSMobileClient.getInstance().credentialsProvider)
+            .build(EbaySearchMobileHubClient::class.java)
+
+        val parameters = mapOf("lang" to "en_US")
+        val headers = mapOf("Content-Type" to "application/json")
+
+        val request = ApiRequest(apiClient::class.java.simpleName)
+            .withPath("/ebay")
+            .withHttpMethod(HttpMethodName.GET)
+            .withHeaders(headers)
+            .withParameters(parameters)
+        if (body.isNotEmpty()) {
+            val content = body.toByteArray()
+            val contentLength = content.count()
+            request
+                .addHeader("Content-Length", contentLength.toString())
+                .withBody(content)
+        }
+        thread(start = true) {
+            try {
+                Log.d(TAG, "Invoking API")
+                val response = apiClient.execute(request)
+                val responseContentStream = response.getContent()
+                if (responseContentStream != null) {
+                    val responseData = IOUtils.toString(responseContentStream)
+                    // Do something with the response data here
+                    Log.d(TAG, responseData)
+                }
+            } catch (ex: Exception) {
+                Log.e(TAG, "Error invoking API")
+            }
+        }
 
     }
      private fun ebayTileClicked(){
