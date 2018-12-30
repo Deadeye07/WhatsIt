@@ -12,6 +12,7 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import org.json.JSONObject
 import android.content.Intent
+import android.support.constraint.ConstraintLayout
 import android.support.design.widget.Snackbar
 import android.util.Log
 import android.view.View
@@ -57,7 +58,7 @@ class SearchActivity : BaseActivity() {
 
 
         //Set on click listener on tile to go to platform detail activity
-        val ebayTile = findViewById<LinearLayout>(R.id.ebayTileLayout)
+        val ebayTile = findViewById<ConstraintLayout>(R.id.ebayTile)
         ebayTile.setOnClickListener(View.OnClickListener { ebayTileClicked()})
 
 
@@ -135,10 +136,12 @@ class SearchActivity : BaseActivity() {
         val concatAverage = getString(R.string.dollar_sign) + responseJSON.getString("average")
         val concatHigh = getString(R.string.dollar_sign) + responseJSON.getString("max")
         val concatLow = getString(R.string.dollar_sign) + responseJSON.getString("min")
+        runOnUiThread {
+            averageTextField.text = concatAverage
+            highTextField.text = concatHigh
+            lowTextField.text = concatLow
+        }
 
-        averageTextField.text = concatAverage
-        highTextField.text = concatHigh
-        lowTextField.text = concatLow
     }
 
     private fun ebayTileClicked(){

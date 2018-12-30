@@ -21,5 +21,6 @@
     <string name="dollar_sign">$</string>
     <string name="recent">Recent</string>
     <string name="saved">Saved</string>
+    <string name="results">Results</string>
 
 </resources>
