@@ -41,7 +41,7 @@ class EbaySearchArrayAdapter (private var activity: Activity, private var items:
         viewHolder.lblTitle?.text = result.title
         //viewHolder.img?.setImageResource(result.image!!)
 
-        return view as View
+        return view
     }
     override fun getItem(i: Int): EbaySearchModel {
         return items[i]

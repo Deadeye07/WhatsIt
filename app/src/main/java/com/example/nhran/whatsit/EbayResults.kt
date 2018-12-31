@@ -7,6 +7,10 @@ import android.view.View
 import com.jjoe64.graphview.series.LineGraphSeries
 import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.series.DataPoint
+import android.provider.AlarmClock.EXTRA_MESSAGE
+import android.support.v7.widget.RecyclerView
+import android.widget.ListView
+import org.json.JSONObject
 
 
 class EbayResults : BaseActivity() {
@@ -15,10 +19,17 @@ class EbayResults : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ebay_results)
 
-        //val actionBar = supportActionBar
-        //actionBar!!.setDisplayHomeAsUpEnabled(true)
+        val searchResults = intent.getStringExtra(EXTRA_MESSAGE)
 
 
+        var adapter : EbaySearchArrayAdapter? = null
+        var searchList : ArrayList<EbaySearchModel> = generateResultData(searchResults)
+        val ebayResultsList = findViewById<ListView>(R.id.ebayResults)
+
+        adapter = EbaySearchArrayAdapter(this, searchList)
+
+        ebayResultsList.adapter = adapter
+        
         val graph = findViewById<View>(R.id.graph) as GraphView
         val series = LineGraphSeries<DataPoint>(
             arrayOf<DataPoint>(
@@ -30,5 +41,26 @@ class EbayResults : BaseActivity() {
             )
         )
         graph.addSeries(series)
+    }
+    private fun generateResultData(results: String?) :ArrayList<EbaySearchModel> {
+
+        var result = ArrayList<EbaySearchModel>()
+
+        var jsonResults = JSONObject(results)
+        //turn into json object
+        var jsonItems = jsonResults.getJSONArray("items")
+        //loop through array of search results
+            //create model of each result
+        for (i in 0 until jsonItems.length()) {
+            var searchResult = EbaySearchModel()
+            val item = jsonItems.getJSONObject(i)
+            searchResult.price = item.getString("price")
+            searchResult.title = item.getString("title")
+            searchResult.image = item.getString("picture")
+            //searchResult.description = item.getString("")
+            searchResult.url = item.getString("url")
+            result.add(searchResult)
+        }
+        return result
     }
 }

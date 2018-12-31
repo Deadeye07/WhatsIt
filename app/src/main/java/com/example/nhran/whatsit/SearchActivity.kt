@@ -37,6 +37,7 @@ class SearchActivity : BaseActivity() {
         private val TAG = this::class.java.simpleName
     }
    // private var apiClient: EbaySearchMobileHubClient? = null
+    var searchResults:String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -108,6 +109,7 @@ class SearchActivity : BaseActivity() {
     private fun doSearch(response: String) {
         //Create graph
         val responseJSON = JSONObject(response)
+        searchResults = response
 
         val graphJSONData = responseJSON.getJSONArray("graph")
 
@@ -147,7 +149,7 @@ class SearchActivity : BaseActivity() {
     private fun ebayTileClicked(){
         //Go to search activity and pass in search term
         val intent = Intent(this, EbayResults::class.java).apply {
-            //putExtra(EXTRA_MESSAGE, searchTerm)
+            putExtra(EXTRA_MESSAGE, searchResults)
         }
         startActivity(intent)
     }
