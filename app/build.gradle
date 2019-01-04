@@ -43,5 +43,6 @@ dependencies {
     //AppSync SDK
     implementation 'com.amazonaws:aws-android-sdk-appsync:2.6.+'
     implementation 'com.amazonaws:aws-android-sdk-apigateway-core:2.7.+'
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
 }

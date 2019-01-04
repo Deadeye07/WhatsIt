@@ -29,7 +29,7 @@ class EbayResults : BaseActivity() {
         adapter = EbaySearchArrayAdapter(this, searchList)
 
         ebayResultsList.adapter = adapter
-        
+
         val graph = findViewById<View>(R.id.graph) as GraphView
         val series = LineGraphSeries<DataPoint>(
             arrayOf<DataPoint>(

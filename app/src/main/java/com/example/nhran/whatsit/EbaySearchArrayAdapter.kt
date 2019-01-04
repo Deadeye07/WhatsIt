@@ -2,6 +2,7 @@ package com.example.nhran.whatsit
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.BitmapFactory
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import com.squareup.picasso.Picasso
 
 class EbaySearchArrayAdapter (private var activity: Activity, private var items: ArrayList<EbaySearchModel>) :  BaseAdapter(){
     private class ViewHolder(row: View?) {
@@ -39,8 +41,8 @@ class EbaySearchArrayAdapter (private var activity: Activity, private var items:
         viewHolder.lblPrice?.text = result.price
         viewHolder.lblDescription?.text = result.description
         viewHolder.lblTitle?.text = result.title
-        //viewHolder.img?.setImageResource(result.image!!)
 
+        Picasso.get().load(result.image).into(viewHolder.img)
         return view
     }
     override fun getItem(i: Int): EbaySearchModel {
