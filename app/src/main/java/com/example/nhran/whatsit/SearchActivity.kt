@@ -38,6 +38,7 @@ class SearchActivity : BaseActivity() {
     }
    // private var apiClient: EbaySearchMobileHubClient? = null
     var searchResults:String? = null
+    var searchTerm:String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +49,7 @@ class SearchActivity : BaseActivity() {
         actionBar!!.setDisplayHomeAsUpEnabled(true)
 
         // Get the Intent that started this activity and extract the string
-        val searchTerm = intent.getStringExtra(EXTRA_MESSAGE)
+        searchTerm = intent.getStringExtra(EXTRA_MESSAGE)
 
         //Place search term in search bar
         val editText = findViewById<EditText>(R.id.editSearch)
@@ -59,11 +60,12 @@ class SearchActivity : BaseActivity() {
 
 
         //Set on click listener on tile to go to platform detail activity
-        val ebayTile = findViewById<ConstraintLayout>(R.id.ebayTile)
+        val ebayTile = findViewById<View>(R.id.ebayTile)
         ebayTile.setOnClickListener(View.OnClickListener { ebayTileClicked()})
 
 
         //Call test API
+
         callCloudLogic(searchTerm)
     }
 
@@ -148,9 +150,12 @@ class SearchActivity : BaseActivity() {
 
     private fun ebayTileClicked(){
         //Go to search activity and pass in search term
-        val intent = Intent(this, EbayResults::class.java).apply {
-            putExtra(EXTRA_MESSAGE, searchResults)
-        }
+
+        val intent = Intent(this, EbayResults::class.java)
+        val extras = Bundle()
+        extras.putString("searchResults", searchResults)
+        extras.putString("searchTerm", searchTerm)
+        intent.putExtras(extras)
         startActivity(intent)
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

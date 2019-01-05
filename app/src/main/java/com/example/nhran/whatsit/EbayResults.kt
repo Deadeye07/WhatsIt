@@ -1,5 +1,6 @@
 package com.example.nhran.whatsit
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.Toolbar
@@ -9,17 +10,29 @@ import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.series.DataPoint
 import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.support.v7.widget.RecyclerView
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.ListView
 import org.json.JSONObject
 
 
 class EbayResults : BaseActivity() {
+    var searchResults:String? = null
+    var searchTerm:String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ebay_results)
+        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        val actionBar = supportActionBar
+        actionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        val searchResults = intent.getStringExtra(EXTRA_MESSAGE)
+        val extras = intent.extras
+        searchResults = extras!!.getString("searchResults")
+        searchTerm = extras.getString("searchTerm")
+
 
 
         var adapter : EbaySearchArrayAdapter? = null
@@ -42,6 +55,22 @@ class EbayResults : BaseActivity() {
         )
         graph.addSeries(series)
     }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            android.R.id.home -> {
+                this.finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+    override fun onBackPressed() {
+        val intent = Intent(this, SearchActivity::class.java).apply {
+            putExtra(EXTRA_MESSAGE, searchTerm)
+        }
+        startActivity(intent)
+    }
     private fun generateResultData(results: String?) :ArrayList<EbaySearchModel> {
 
         var result = ArrayList<EbaySearchModel>()
@@ -62,5 +91,10 @@ class EbayResults : BaseActivity() {
             result.add(searchResult)
         }
         return result
+    }
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.maintoolbar, menu)
+        return true
     }
 }
