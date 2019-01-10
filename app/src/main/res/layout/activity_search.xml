@@ -12,7 +12,7 @@
             layout="@layout/toolbar"/>
     <android.support.constraint.ConstraintLayout
             android:layout_width="371dp"
-            android:layout_height="341dp" app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            android:layout_height="334dp" app:layout_constraintTop_toBottomOf="@+id/toolbar"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="8dp" android:id="@+id/ebayTile">
 
@@ -35,7 +35,7 @@
             <TextView
                     android:text="Average"
                     android:layout_width="wrap_content"
-                    android:layout_height="23dp"
+                    android:layout_height="wrap_content"
                     android:id="@+id/textView"
                     android:textStyle="bold"
                     android:layout_marginStart="8dp"
@@ -57,7 +57,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/highPrice"
                     app:layout_constraintStart_toEndOf="@+id/textView3"
-                    android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginStart="8dp"
                     android:layout_marginEnd="8dp" android:layout_marginTop="8dp"
                     app:layout_constraintTop_toTopOf="parent" android:layout_marginBottom="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"/>
@@ -82,12 +82,11 @@
         </android.support.constraint.ConstraintLayout>
         <com.jjoe64.graphview.GraphView
                 android:layout_width="match_parent"
-                android:layout_height="286dp"
+                android:layout_height="202dp"
                 android:id="@+id/miniGraph"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="8dp" app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintHorizontal_bias="0.0"
-                android:layout_marginBottom="8dp"/>
+                app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout"/>
     </android.support.constraint.ConstraintLayout>
 </android.support.constraint.ConstraintLayout>

@@ -29,6 +29,7 @@ import com.jjoe64.graphview.series.BarGraphSeries
 import com.jjoe64.graphview.GraphView
 import com.jjoe64.graphview.series.DataPoint
 import com.example.nhran.whatsit.R.id.graph
+import com.jjoe64.graphview.GridLabelRenderer
 import com.jjoe64.graphview.helper.StaticLabelsFormatter
 import kotlin.concurrent.thread
 
@@ -119,19 +120,24 @@ class SearchActivity : BaseActivity() {
         val graph = findViewById<View>(R.id.miniGraph) as GraphView
         // use static labels for horizontal and vertical labels
         val staticLabelsFormatter = StaticLabelsFormatter(graph)
-        staticLabelsFormatter.setHorizontalLabels(arrayOf(graphJSONData.getJSONObject(0).getString("group"), graphJSONData.getJSONObject(1).getString("group"),graphJSONData.getJSONObject(2).getString("group"),graphJSONData.getJSONObject(3).getString("group"), graphJSONData.getJSONObject(4).getString("group")))
+        staticLabelsFormatter.setHorizontalLabels(arrayOf(graphJSONData.getJSONObject(0).getString("group"), graphJSONData.getJSONObject(1).getString("group"),graphJSONData.getJSONObject(2).getString("group"),graphJSONData.getJSONObject(3).getString("group")))
         graph.gridLabelRenderer.labelFormatter = staticLabelsFormatter
+        graph.gridLabelRenderer.labelsSpace = 30
+        graph.gridLabelRenderer.padding = 30
+
+        graph.getGridLabelRenderer().reloadStyles()
         val series = BarGraphSeries<DataPoint>(
             arrayOf(
                 DataPoint(0.0, graphJSONData.getJSONObject(0).getString("count").toDouble()),
                 DataPoint(1.0, graphJSONData.getJSONObject(1).getString("count").toDouble()),
                 DataPoint(2.0, graphJSONData.getJSONObject(2).getString("count").toDouble()),
-                DataPoint(3.0, graphJSONData.getJSONObject(3).getString("count").toDouble()),
-                DataPoint(4.0, graphJSONData.getJSONObject(4).getString("count").toDouble())
+                DataPoint(3.0, graphJSONData.getJSONObject(3).getString("count").toDouble())
+                //DataPoint(4.0, graphJSONData.getJSONObject(4).getString("count").toDouble())
 
             )
         )
         graph.addSeries(series)
+
         //GEt the listview to populate
         val averageTextField = findViewById<TextView>(R.id.ebayAverage)
         val highTextField =findViewById<TextView>(R.id.highPrice)
